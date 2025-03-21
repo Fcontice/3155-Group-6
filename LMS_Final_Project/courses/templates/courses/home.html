@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LMS Home</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container" style="background-color: #E8F5E9;">
+        <h1>Welcome to the LMS, {{ user.username }}!</h1>
+        <p style="text-align: center;">You are a {{ role|title }} | <a href="{% url 'custom_logout' %}">Logout</a></p>
+        {% if role == 'teacher' %}
+            <p style="text-align: center;"><a href="{% url 'create_course' %}">Create a New Course</a></p>
+        {% endif %}
+        <div class="nav-cards">
+            <div class="card">
+                <a href="{% url 'course_list' %}">My Courses</a>
+                <p>View and manage your enrolled courses.</p>
+            </div>
+            <div class="card">
+                <a href="{% url 'gradebook_overview' %}">Gradebook</a>
+                <p>Check your grades across all courses.</p>
+            </div>
+            <div class="card">
+                <a href="{% url 'profile' %}">Profile</a>
+                <p>View and edit your profile details.</p>
+            </div>
+            <div class="card">
+                <a href="{% url 'calendar' %}">Calendar</a>
+                <p>View assignment due dates and events.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

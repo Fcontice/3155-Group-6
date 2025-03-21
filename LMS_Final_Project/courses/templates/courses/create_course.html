@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Course</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Create a New Course</h1>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <p>
+                <label for="title">Course Title:</label>
+                <input type="text" name="title" id="title" required>
+            </p>
+            <p>
+                <label for="description">Description:</label>
+                <textarea name="description" id="description" required></textarea>
+            </p>
+            <button type="submit">Create Course</button>
+        </form>
+        <p><a href="{% url 'course_list' %}">Back to Courses</a> | <a href="{% url 'home' %}">Home</a></p>
+    </div>
+</body>
+</html>

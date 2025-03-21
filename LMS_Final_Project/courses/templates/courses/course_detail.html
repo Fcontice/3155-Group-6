@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% extends 'courses/navbar.html' %}
+
+{% block content %}
+<html>
+<head>
+    <title>{{ course.title }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ course.title }}</h1>
+        <p>{{ course.description }}</p>
+        <h2>Assignments</h2>
+        <ul>
+        {% for assignment in assignments %}
+            <li>{{ assignment.title }} (Due: {{ assignment.due_date }}) 
+                <a href="{% url 'submit_assignment' assignment.id %}">Submit</a></li>
+        {% empty %}
+            <li>No assignments yet.</li>
+        {% endfor %}
+        </ul>
+        <p><a href="{% url 'gradebook' course.id %}">View Gradebook</a></p>
+        <p><a href="{% url 'course_list' %}">Back to Courses</a> | <a href="{% url 'home' %}">Home</a></p>
+    </div>
+</body>
+</html>
+{% endblock content %}

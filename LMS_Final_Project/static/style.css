@@ -1,0 +1,143 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4; /* Light gray background */
+    color: #333; /* Dark gray text for readability */
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff; /* White container background */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+h1 {
+    color: #2E7D32; /* Forest green for headers */
+    text-align: center;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+a {
+    color: #2E7D32; /* Green links */
+    text-decoration: none;
+}
+a:hover {
+    color: #FFD700; /* Gold on hover */
+    text-decoration: underline;
+}
+button {
+    background-color: #2E7D32; /* Green buttons */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #FFD700; /* Gold on button hover */
+    color: #333; /* Dark text for contrast */
+}
+.nav-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+.card {
+    background: #fff;
+    border: 2px solid #FFD700; /* Gold border for cards */
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s, border-color 0.2s;
+}
+.card:hover {
+    transform: scale(1.05);
+    border-color: #2E7D32; /* Green border on hover */
+}
+.card a {
+    font-size: 18px;
+    color: #2E7D32; /* Green card links */
+}
+.card a:hover {
+    color: #FFD700; /* Gold on card link hover */
+}
+.calendar {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.calendar th, .calendar td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    width: 14%;
+}
+.calendar th {
+    background-color: #2E7D32; /* Green header for calendar */
+    color: white;
+}
+.calendar td {
+    background-color: #fff;
+    height: 80px;
+    vertical-align: top;
+}
+.calendar td.empty {
+    background-color: #f4f4f4; /* Light gray for empty days */
+}
+.calendar .event {
+    background-color: #FFD700; /* Gold for event highlights */
+    margin: 5px 0;
+    padding: 2px 5px;
+    font-size: 12px;
+    border-radius: 3px;
+    color: #333; /* Dark text for contrast */
+}
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#sidebar {
+    background-color: #16a085;
+    color: white;
+    height: 100%;
+    padding: 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 60px;
+    z-index: 2;
+    transition: width 0.3s;
+}
+#sidebar .link-text {
+    visibility: hidden;
+}
+#sidebar:hover .link-text {
+    visibility: visible;
+}
+#sidebar:hover {
+    width: 250px;
+    transition: width 0.3s;
+}
+#sidebar a {
+    color: #f4f4f4;
+    white-space: nowrap;
+    overflow: hidden;
+}
+#sidebar-nav {
+    text-align: left;
+    font-size: 30px;
+    margin-top: 20px;
+}

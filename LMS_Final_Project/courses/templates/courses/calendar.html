@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% extends 'courses/navbar.html' %}
+
+{% block content %}
+<html>
+<head>
+    <title>Calendar</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ month_name }} {{ year }}</h1>
+        <div class="nav-links">
+            <a href="{% url 'calendar' %}?year={{ prev_year }}&month={{ prev_month }}">Previous Month</a>
+            <a href="{% url 'calendar' %}?year={{ next_year }}&month={{ next_month }}">Next Month</a>
+        </div>
+        <table class="calendar" style="border: 2px solid #2E7D32;"> <!-- Green border -->
+            <thead>
+                <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for week in calendar %}
+                    <tr>
+                        {% for day in week %}
+                            {% if day == 0 %}
+                                <td class="empty"></td>
+                            {% else %}
+                                <td>
+                                    {{ day }}
+                                    {% if day in events %}
+                                        {% for event in events.day %}
+                                            <div class="event">
+                                                {{ event.title }} ({{ event.course }})
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p><a href="{% url 'home' %}">Back to Home</a></p>
+    </div>
+</body>
+</html>
+{% endblock content %}

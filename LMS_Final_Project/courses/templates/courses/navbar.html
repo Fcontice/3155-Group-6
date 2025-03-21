@@ -1,0 +1,31 @@
+{% load static %}
+<html>
+  <div id="sidebar" role="navigation">
+    <div id="sidebar-nav">
+      <ul class="nav nav-stacked">
+          <li><a href="/">
+            <img src="{% static 'home-icon.svg' %}" width="30" height="30">
+            <span class="link-text">Home</span></a>
+          </li>
+          <li><a href="/courses">
+            <img src="{% static 'training-icon.svg' %}" width="30" height="30">
+            <span class="link-text">Courses</span></a>
+          </li>
+          <li><a href="/gradebook">
+            <img src="{% static 'book-icon.svg' %}" width="30" height="30">
+            <span class="link-text">Gradebook</span></a>
+          </li>
+          <li><a href="/calendar">
+            <img src="{% static 'date-icon.svg' %}" width="30" height="30">
+            <span class="link-text">Calendar</span></a>
+          </li>
+          <li><a href="/profile">
+            <img src="{% static 'id-proof-line-icon.svg' %}" width="30" height="30">
+            <span class="link-text">Your Profile</span></a>
+          </li>
+      </ul>
+    </div>
+  </div>
+  {% block content %}
+  {% endblock content %}
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% extends 'courses/navbar.html' %}
+
+{% block content %}
+<html>
+<head>
+    <title>Gradebook Overview</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gradebook Overview</h1>
+        <ul>
+        {% for submission in submissions %}
+            <li>{{ submission.assignment.course.title }} - {{ submission.assignment.title }}: {{ submission.grade|default:"Not graded" }} - {{ submission.feedback|default:"No feedback" }}</li>
+        {% empty %}
+            <li>No submissions yet.</li>
+        {% endfor %}
+        </ul>
+        <p><a href="{% url 'home' %}">Back to Home</a></p>
+    </div>
+</body>
+</html>
+{% endblock content %}

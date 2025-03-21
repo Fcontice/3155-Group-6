@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% extends 'courses/navbar.html' %}
+
+{% block content %}
+<html>
+<head>
+    <title>Courses</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>My Courses</h1>
+        <p><a href="{% url 'home' %}">Back to Home</a> | <a href="{% url 'custom_logout' %}">Logout</a></p>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li style="color: {% if message.tags == 'error' %}red{% else %}green{% endif %};">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% if role == 'student' %}
+            <h2>Enrolled Courses</h2>
+            <ul>
+            {% for course in enrolled_courses %}
+                <li><a href="{% url 'course_detail' course.id %}">{{ course.title }}</a></li>
+            {% empty %}
+                <li>You are not enrolled in any courses.</li>
+            {% endfor %}
+            </ul>
+            <h2>Available Courses</h2>
+            <ul>
+            {% for course in available_courses %}
+                <li>
+                    <a href="{% url 'course_detail' course.id %}">{{ course.title }}</a>
+                    <a href="{% url 'join_course' course.id %}" style="margin-left: 10px;">Join Course</a>
+                </li>
+            {% empty %}
+                <li>No available courses to join.</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <h2>All Courses</h2>
+            <ul>
+            {% for course in available_courses %}
+                <li><a href="{% url 'course_detail' course.id %}">{{ course.title }}</a></li>
+            {% empty %}
+                <li>No courses available.</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>
+{% endblock content %}

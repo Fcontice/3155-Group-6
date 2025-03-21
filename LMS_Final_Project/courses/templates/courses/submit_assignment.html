@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit {{ assignment.title }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Submit {{ assignment.title }}</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+        <p><a href="{% url 'course_detail' assignment.course.id %}">Back to Course</a> | <a href="{% url 'home' %}">Home</a></p>
+    </div>
+</body>
+</html>
