@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Course, Assignment, Submission, UserProfile
-from .forms import SubmissionForm
+from .models import Course, Assignment, Submission, UserProfile, Discussion
+from .forms import SubmissionForm, DiscussionForm
 import calendar
 from datetime import datetime, timedelta
 from django.utils.dateparse import parse_datetime
@@ -182,3 +182,38 @@ def calendar_view(request):
         'role': user_profile.role
     }
     return render(request, 'courses/calendar.html', context)
+
+@login_required(login_url='/login/')
+def create_discussion(request, course_id):
+    user_profile = UserProfile.objects.get(user=request.user)
+    course = get_object_or_404(Course, id=course_id)
+
+    if request.method == 'POST':
+        form = DiscussionForm(request.POST)
+        if form.is_valid():
+            discussion = form.save(commit=False)
+            discussion.course = course
+            discussion.author = request.user
+            discussion.save()
+            messages.success(request, "Discussion created successfully!")
+            return redirect('course_discussions', course_id=course.id)
+    else:
+        form = DiscussionForm()
+
+    return render(request, 'courses/create_discussion.html', {
+        'form': form,
+        'course': course,
+        'role': user_profile.role
+    })
+
+@login_required(login_url='/login/')
+def course_discussions(request, course_id):
+    user_profile = UserProfile.objects.get(user=request.user)
+    course = get_object_or_404(Course, id=course_id)
+    discussions = course.discussions.all()
+
+    return render(request, 'courses/course_discussions.html', {
+        'course': course,
+        'discussions': discussions,
+        'role': user_profile.role
+    })

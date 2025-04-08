@@ -42,3 +42,13 @@ class Submission(models.Model):
 
     def __str__(self):
         return f"{self.student.username} - {self.assignment.title}"
+    
+class Discussion(models.Model):
+    course = models.ForeignKey('Course', related_name='discussions', on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title

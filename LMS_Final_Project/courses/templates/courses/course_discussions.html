@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% extends 'courses/navbar.html' %}
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Discussions</title>
+    {% load static %}
+    {% block head %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    {% endblock %}
+</head>
+<body>   
+   
+    <div class="container mt-5">
+        <h2 class="mb-4">Discussions for {{ course.name }}</h2>
+
+        <div class="mb-3">
+            <a href="{% url 'create_discussion' course.id %}" class="btn btn-primary">Start New Discussion</a>
+        </div>
+
+        {% if discussions.count > 0 %}
+            <div class="list-group">
+                {% for discussion in discussions %}
+                    <div class="list-group-item">
+                        <h5 class="mb-1">{{ discussion.title }}</h5>
+                        <p class="mb-1">{{ discussion.content|truncatewords:30 }}</p>
+                        <small class="text-muted">By {{ discussion.author.username }} on {{ discussion.created_at|date:"F d, Y H:i" }}</small>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-muted">No discussions yet. Be the first to start one!</p>
+        {% endif %}
+
+        <div class="mt-4">
+            <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock content %}
