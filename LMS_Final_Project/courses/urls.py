@@ -12,4 +12,6 @@ urlpatterns = [
     path('gradebook/', views.gradebook_overview, name='gradebook_overview'),
     path('profile/', views.profile, name='profile'),
     path('calendar/', views.calendar_view, name='calendar'),
+    path('course/<int:course_id>/discussions/', views.course_discussions, name='course_discussions'),
+    path('course/<int:course_id>/discussions/create/', views.create_discussion, name='create_discussion'),
 ]

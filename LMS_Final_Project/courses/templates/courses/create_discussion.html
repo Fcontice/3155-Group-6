@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% extends 'courses/navbar.html' %}
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Discussion</title>
+    {% load static %}
+    {% block head %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    {% endblock %}
+</head>
+<body> 
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Start a New Discussion in {{ course.name }}</h2>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_title" class="form-label">Title</label>
+                {{ form.title }}
+            </div>
+            <div class="mb-3">
+                <label for="id_content" class="form-label">Content</label>
+                {{ form.content }}
+            </div>
+            <button type="submit" class="btn btn-success">Create Discussion</button>
+            <a href="{% url 'course_discussions' course.id %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock content %}
